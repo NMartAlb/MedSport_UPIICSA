@@ -18,4 +18,10 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Dominio\ServiciosEstudiantiles.Dominio.csproj" />
+    <ProjectReference Include="..\..\src\Aplicacion\ServiciosEstudiantiles.Aplicacion.csproj" />
+    <ProjectReference Include="..\..\src\Infraestructura\ServiciosEstudiantiles.Infraestructura.csproj" />
+  </ItemGroup>
+
 </Project>

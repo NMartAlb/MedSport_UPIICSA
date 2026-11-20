@@ -1,27 +1,21 @@
-﻿using ServiciosEstudiantiles.Aplicacion.Actividades;
+using ServiciosEstudiantiles.Aplicacion.Actividades;
 using ServiciosEstudiantiles.Dominio.Actividades;
+using ServiciosEstudiantiles.Infraestructura.Comun;
 
 namespace ServiciosEstudiantiles.Infraestructura.Actividades;
 
-public class ActividadRepositorioEnMemoria : IActividadRepositorio
+public class ActividadRepositorioEnMemoria : RepositorioEnMemoria<Actividad>, IActividadRepositorio
 {
-    private readonly List<Actividad> _datos = new()
+    public ActividadRepositorioEnMemoria() : base(Semilla()) { }
+
+    // CoachId = 2 es el coach de prueba. Los documentos requeridos 1, 2 y 3 son los tipos de prueba.
+    private static IEnumerable<Actividad> Semilla() => new[]
     {
-        new() { Id = 1, Nombre = "Básquetbol", Tipo = TipoActividad.Deportiva,
-                Horario = "Lun y Mié 14:00", Coach = "Coach de prueba", CupoMaximo = 30, Inscritos = 12 },
-        new() { Id = 2, Nombre = "Taekwondo", Tipo = TipoActividad.Deportiva,
-                Horario = "Mar y Jue 16:00", Coach = "Coach de prueba", CupoMaximo = 25, Inscritos = 25 },
-        new() { Id = 3, Nombre = "Teatro", Tipo = TipoActividad.Cultural,
-                Horario = "Vie 15:00", Coach = "Profesor de prueba", CupoMaximo = 20, Inscritos = 5 },
+        new Actividad { Nombre = "Básquetbol", Tipo = TipoActividad.Deportiva, Horario = "Lun y Mié 14:00",
+            CoachId = 2, CupoMaximo = 30, TiposDocumentoRequeridos = new List<int> { 1, 2, 3 } },
+        new Actividad { Nombre = "Taekwondo", Tipo = TipoActividad.Deportiva, Horario = "Mar y Jue 16:00",
+            CoachId = 2, CupoMaximo = 25, TiposDocumentoRequeridos = new List<int> { 1, 2, 3 } },
+        new Actividad { Nombre = "Teatro", Tipo = TipoActividad.Cultural, Horario = "Vie 15:00",
+            CoachId = 2, CupoMaximo = 20, TiposDocumentoRequeridos = new List<int> { 1, 2 } }
     };
-
-    public Task<IReadOnlyList<Actividad>> ListarAsync(TipoActividad? tipo)
-    {
-        IEnumerable<Actividad> consulta = _datos;
-        if (tipo.HasValue) consulta = consulta.Where(a => a.Tipo == tipo.Value);
-        return Task.FromResult<IReadOnlyList<Actividad>>(consulta.ToList());
-    }
-
-    public Task<Actividad?> ObtenerAsync(int id) =>
-        Task.FromResult(_datos.FirstOrDefault(a => a.Id == id));
 }
