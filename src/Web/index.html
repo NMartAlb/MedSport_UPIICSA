@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servicios Estudiantiles · UPIICSA</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pagina-acceso">
+  <main class="tarjeta-acceso">
+    <h1>Servicios Estudiantiles</h1>
+    <p class="subtitulo">Actividades deportivas, culturales y servicio médico</p>
+    <p id="mensaje" role="alert" hidden></p>
+
+    <section id="paso-acceso">
+      <h2>Iniciar sesión</h2>
+      <form id="form-login" autocomplete="on">
+        <label>Correo institucional
+          <input type="email" name="correo" placeholder="nombre@alumno.ipn.mx" required autocomplete="username">
+        </label>
+        <label>Contraseña
+          <input type="password" name="contrasena" required autocomplete="current-password">
+        </label>
+        <button type="submit">Entrar</button>
+      </form>
+      <p><button type="button" class="enlace" id="ir-registro">Crear o restablecer mi contraseña</button></p>
+    </section>
+
+    <section id="paso-correo" hidden>
+      <h2>Crear o restablecer contraseña</h2>
+      <p>Escribe tu correo institucional (@ipn.mx). Te enviaremos un código de verificación.</p>
+      <form id="form-correo">
+        <label>Correo institucional
+          <input type="email" name="correo" placeholder="nombre@alumno.ipn.mx" required>
+        </label>
+        <button type="submit">Enviar código</button>
+      </form>
+      <p><button type="button" class="enlace" data-volver>Volver</button></p>
+    </section>
+
+    <section id="paso-codigo" hidden>
+      <h2>Escribe tu código</h2>
+      <p>Revisa tu correo. El código es de 6 dígitos y vence en 10 minutos.</p>
+      <form id="form-codigo">
+        <label>Código de verificación
+          <input type="text" name="codigo" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code">
+        </label>
+        <button type="submit">Verificar</button>
+      </form>
+      <p><button type="button" class="enlace" data-volver>Empezar de nuevo</button></p>
+    </section>
+
+    <section id="paso-contrasena" hidden>
+      <h2>Crea tu contraseña</h2>
+      <p>Mínimo 10 caracteres, con letras y números.</p>
+      <form id="form-contrasena">
+        <label>Nueva contraseña
+          <input type="password" name="contrasena" minlength="10" maxlength="128" required autocomplete="new-password">
+        </label>
+        <label>Repite la contraseña
+          <input type="password" name="repetir" minlength="10" maxlength="128" required autocomplete="new-password">
+        </label>
+        <button type="submit">Guardar contraseña</button>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

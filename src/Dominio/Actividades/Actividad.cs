@@ -1,15 +1,18 @@
-﻿namespace ServiciosEstudiantiles.Dominio.Actividades;
+using ServiciosEstudiantiles.Dominio.Comun;
+
+namespace ServiciosEstudiantiles.Dominio.Actividades;
 
 public enum TipoActividad { Deportiva = 1, Cultural = 2 }
 
-public class Actividad
+public class Actividad : Entidad
 {
-    public int Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
     public TipoActividad Tipo { get; set; }
     public string Horario { get; set; } = string.Empty;
-    public string Coach { get; set; } = string.Empty;
+    public int CoachId { get; set; }
     public int CupoMaximo { get; set; }
-    public int Inscritos { get; set; } // temporal: luego saldrá de las inscripciones
-    public int CupoDisponible => CupoMaximo - Inscritos;
+    public bool Activa { get; set; } = true;
+
+    /// Ids de los tipos de documento que el alumno debe entregar para esta actividad.
+    public List<int> TiposDocumentoRequeridos { get; set; } = new();
 }
